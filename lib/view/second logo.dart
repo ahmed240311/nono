@@ -182,7 +182,7 @@ class SecondLogo extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 27.0, right: 5.0),
+          padding: const EdgeInsets.only(top: 27.5, right: 5.0),
           child: Align(
             alignment: Alignment.topRight,
             child: IconButton(
