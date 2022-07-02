@@ -27,7 +27,14 @@ centerTitle: true,
           ),
         ),
         elevation: 0.0,
-        backgroundColor: color,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: <Color>[Colors.white30, Colors.blue]),
+          ),
+        ),
         leading: GestureDetector(
             onTap: () {
               Get.offAll(LoginScreen());
@@ -65,10 +72,13 @@ centerTitle: true,
                 SizedBox(
                   height: 10.0,
                 ),
-                CustomText(
-                  text: "Sign Up To Continue",
-                  fontSize: 14.4,
-                  color: Colors.grey,
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: CustomText(
+                    text: "Sign Up To Continue",
+                    fontSize: 13.4,
+                    color: Colors.grey,
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height/24.9,
@@ -132,7 +142,7 @@ centerTitle: true,
                       controller.createEmailAndPassword();
                     }
                   },
-                  color: color,
+                  color: Colors.blue.shade500,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height/26.9,

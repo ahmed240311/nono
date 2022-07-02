@@ -35,8 +35,16 @@ class _forgetpass extends State<ForgetScreen> {
             fontSize: 30.0,
           ),
         ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: <Color>[Colors.white30, Colors.blue]),
+          ),
+        ),
         elevation: 0.0,
-        backgroundColor: color,
+        // backgroundColor:appbar
         leading: GestureDetector(
             onTap: () {
               Get.offAll(LoginScreen());
@@ -114,7 +122,7 @@ class _forgetpass extends State<ForgetScreen> {
                 padding: const EdgeInsets.all(27.0),
                 child: CustomButton(
                   buttonText: "Send ",
-                  color: color,
+                  color: Colors.blue.shade500,
                   onPress: () {
                     _formkey.currentState!.save();
                     if (_formkey.currentState!.validate()) {

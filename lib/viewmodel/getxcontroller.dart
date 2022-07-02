@@ -16,23 +16,28 @@ class Auth extends GetxController {
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime selectedDateTime = DateTime.now();
+  ListOfCatagory resultBack = new ListOfCatagory();
 
   // FacebookLogin _facebookLogin = FacebookLogin();
   late String email, password, name;
-  var showPass = true;
+  // var showPass = false.obs;
 
-  final dropdownValueQ = "1".obs;
+  final dropdownValueLang = "اللغة العربية".obs;
   File? image;
   final picker = ImagePicker();
   Rx<User> _user = Rx<User>();
 
   String? get user => _user.value?.email;
+  final tappedIndexReanted = 0.obs;
+  final tappedIndexBedRoom = 0.obs;
+  final tappedIndexbathRoom = 0.obs;
 
   // var url;
 
   @override
   void onInit() {
     _user.bindStream(_auth.authStateChanges());
+    resultBack.ShowResult();
     // subscribeToAdmin();
     // getDeviceToken();
     //  cofigureCallBack();
@@ -43,13 +48,24 @@ class Auth extends GetxController {
 
   @override
   void onReady() {}
-  void changeIcon(bool showpass) {
-    showPass = !showpass;
+  void changeColorBackGround(int changeColor) {
+    tappedIndexReanted.value = changeColor;
+    tappedIndexBedRoom.value=changeColor;
+    update();
+    // tappedIndex.refresh();
   }
-  //
-  // void setSelectedDate(DateTime value) {
-  //   selectedDateTime = value;
-  // }
+  void changeBackGroundBedRoom(int changeColor) {
+    tappedIndexBedRoom.value=changeColor;
+    update();
+  }
+ void changeBackGroundbathRoom(int changeColor) {
+   tappedIndexbathRoom.value=changeColor;
+    update();
+  }
+
+  void setSelectedLanguage(String value) {
+    dropdownValueLang.value = value;
+  }
 
   Future pickImage() async {
     //pick image   use ImageSource.camera for accessing camera.

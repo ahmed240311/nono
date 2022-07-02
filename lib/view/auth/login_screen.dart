@@ -9,6 +9,8 @@ import 'package:nono/view/auth/register.dart';
 import 'package:nono/viewmodel/getxcontroller.dart';
 
 import '../../constant.dart';
+import '../checkCars or building.dart';
+// import '../second logo.dart';
 import 'forgetpass_screen.dart';
 
 class LoginScreen extends GetWidget<Auth> {
@@ -20,14 +22,34 @@ class LoginScreen extends GetWidget<Auth> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.white60,
-        title: CustomText(
-          text: "Al Nono",
-          alignment: Alignment.center,
-          color: Colors.white,
-          fontSize: 30.0,
+        centerTitle: true,
+        title: Padding(
+          padding: const EdgeInsets.only(right: 35.0),
+          child: CustomText(
+            text: "Al Nono",
+            alignment: Alignment.center,
+            color: Colors.white,
+            fontSize: 30.0,
+          ),
+        ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: <Color>[Colors.white30, Colors.blue]),
+          ),
         ),
         elevation: 0.0,
-        backgroundColor: color,
+        // backgroundColor:appbar
+        leading: GestureDetector(
+            onTap: () {
+              Get.offAll(CheckCarsOrBuilding());
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
       ),
       body: Form(
         key: _globalKey,
@@ -52,6 +74,7 @@ class LoginScreen extends GetWidget<Auth> {
                       child: CustomText(
                         text: "Sign Up",
                         fontSize: 18,
+                        // color: Colors.orange,
                         color: color,
                       ),
                     ),
@@ -64,7 +87,7 @@ class LoginScreen extends GetWidget<Auth> {
                   padding: const EdgeInsets.only(left: 5.0),
                   child: CustomText(
                     text: "Sign In To Continue",
-                    fontSize: 14.0,
+                    fontSize: 13.5,
                     color: Colors.grey,
                   ),
                 ),
@@ -136,7 +159,7 @@ class LoginScreen extends GetWidget<Auth> {
                       controller.signInEmailAndPassword();
                     }
                   },
-                  color: color,
+                  color: Colors.blue.shade500,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height/25.9,

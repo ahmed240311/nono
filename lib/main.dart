@@ -2,10 +2,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nono/view/auth/login_screen.dart';
+import 'package:nono/view/checkCars%20or%20building.dart';
 import 'package:nono/view/logo_screen.dart';
-import 'package:nono/view/second%20logo.dart';
 
 import 'helper/binding.dart';
+import 'model/trans.dart';
 
 
 void main() async{
@@ -23,15 +25,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: Binding(),
+      translations: TransL(),
+      locale: Locale('ar'),
+      fallbackLocale: Locale('ar'),
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         // body: cotrollerView(),
-        // body: LogoScreen(),
-        body: SecondLogo(),
+        body: LogoScreen(),
+        // body: SecondLogo(),
+        // body: LoginScreen(),
       ),
     );
   }
