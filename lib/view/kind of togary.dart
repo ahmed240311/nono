@@ -59,7 +59,7 @@ class _TogaryBuildingState extends State<TogaryBuilding> {
                   tappedIndex == index
                       ? Colors.green.withOpacity(.7)
                       : Colors.grey.withOpacity(.3),
-                  radius: 24,
+                  radius: 23,
                   child: Padding(
                     padding: const EdgeInsets.all(7.4),
                     child: ClipOval(
@@ -71,7 +71,7 @@ class _TogaryBuildingState extends State<TogaryBuilding> {
                     ),
                   )),
               minVerticalPadding: 4.0,
-              contentPadding: EdgeInsets.only(top: 19, bottom: 56.0),
+              contentPadding: EdgeInsets.only(top: 20, bottom: 56.0),
               subtitle: CustomText(
                 text: togaryText[index],
                 alignment: Alignment.center,

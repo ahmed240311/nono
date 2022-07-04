@@ -2,14 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nono/model/customtext.dart';
+import 'package:nono/model/usermodel.dart';
 import 'package:nono/service/firestoreuser.dart';
 import 'package:nono/viewmodel/getxcontroller.dart';
 
 import '../checkCars or building.dart';
+import '../list of mafrosha.dart';
 
 class ResultHome extends GetWidget<Auth> {
   ListOfCatagory resultBack = new ListOfCatagory();
 
+  // late List <ModelForListOfPage>valuesBack;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +56,7 @@ class ResultHome extends GetWidget<Auth> {
             builder: (context, snapshot) {
               var height = MediaQuery.of(context).size.height;
               var width = MediaQuery.of(context).size.width;
-              if (snapshot.hasError) print('Error = ${snapshot.error}');
+              // if (snapshot.hasError) print('Error = ${snapshot.error}');
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 300.0),
@@ -63,25 +66,174 @@ class ResultHome extends GetWidget<Auth> {
                 );
               }
               if (snapshot.hasData) {
-                return Container(
-                  height: height / 1.9,
-                  child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        color: Colors.white.withOpacity(0.7),
-                        child: Column(
-                          children: [
-                            CustomText(
-                              text: resultBack.ListOfResult[index]['address'],
-                              fontSize: 19.7,
-                              color: Colors.black87,
-                            )
-                          ],
+                List<ModelForListOfPage> valuesReturned = resultBack.result;
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 18.5,
+                          child: MafroshaList(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Container(
+                        height: height * 1.0,
+                        child: ListView.builder(
+                          itemCount: valuesReturned.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: height / 4.6,
+                              child: Card(
+                                color: Colors.white.withOpacity(.8),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        width: width / 2.7,
+                                        // height: 370.0,
+                                        child: Image.asset(
+                                          'images/ui.jpg',
+                                        )),
+                                    // Image.network("http://${valuesReturned[index].pics[0]}"),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomText(
+                                            text:
+                                                '${valuesReturned[index].price} جنيه ',
+                                            fontSize: 20.0,
+                                            color: Colors.black87,
+                                          ),
+                                          CustomText(
+                                            text: valuesReturned[index].ad_dasc,
+                                            fontSize: 18.7,
+                                            color: Colors.black54,
+                                          ),
+                                          CustomText(
+                                            text: valuesReturned[index].type,
+                                            fontSize: 18.7,
+                                            color: Colors.black54,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 3.0),
+                                            child: Row(
+                                              children: [
+                                                CustomText(
+                                                  text:
+                                                      '${valuesReturned[index].rooms_num} غرف نوم ',
+                                                  fontSize: 14.9,
+                                                  color: Colors.black54,
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 4.0),
+                                                  child: CustomText(
+                                                    text:
+                                                        '${valuesReturned[index].bathrooms_num} حمامات ',
+                                                    fontSize: 14.9,
+                                                    color: Colors.black54,
+                                                  ),
+                                                ),
+                                                CustomText(
+                                                  text:
+                                                      '${valuesReturned[index].area} متر مربع ',
+                                                  fontSize: 14.9,
+                                                  color: Colors.black54,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            // crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: width / 5.0,
+                                                height: height /19.4,
+                                                color: Colors.blueGrey
+                                                    .withOpacity(.6),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                                                children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(top:4.0),
+                                                      child: CustomText(
+                                                        text: 'الإيميل',
+                                                        fontSize: 17.5,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    Icon(
+                                                      Icons.email,
+                                                      color: Colors
+                                                          .blueAccent,
+                                                      size: 21.0,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0),
+                                                child:
+                                                Container(
+                                                  width: width / 5.1,
+                                                  height: height /19.4,
+                                                  color: Colors.blueGrey
+                                                      .withOpacity(.6),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(top:4.0),
+                                                        child: CustomText(
+                                                          text: 'اتصال',
+                                                          fontSize: 17.5,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      Icon(
+                                                        Icons.phone,
+                                                        color: Colors
+                                                            .blueAccent,
+                                                        size: 21.0,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: width / 7.6,
+                                                height: height /19.4,
+                                                color: Colors.blueGrey
+                                                    .withOpacity(.6),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               } else
                 return Center(

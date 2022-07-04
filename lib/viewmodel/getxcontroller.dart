@@ -31,6 +31,7 @@ class Auth extends GetxController {
   final tappedIndexReanted = 0.obs;
   final tappedIndexBedRoom = 0.obs;
   final tappedIndexbathRoom = 0.obs;
+  final tappedIndexMafrosha = 2.obs;
 
   // var url;
 
@@ -50,7 +51,7 @@ class Auth extends GetxController {
   void onReady() {}
   void changeColorBackGround(int changeColor) {
     tappedIndexReanted.value = changeColor;
-    tappedIndexBedRoom.value=changeColor;
+    // tappedIndexBedRoom.value=changeColor;
     update();
     // tappedIndex.refresh();
   }
@@ -60,6 +61,10 @@ class Auth extends GetxController {
   }
  void changeBackGroundbathRoom(int changeColor) {
    tappedIndexbathRoom.value=changeColor;
+    update();
+  }
+  void changeBackGroundMafrosha(int changeColor) {
+    tappedIndexMafrosha.value=changeColor;
     update();
   }
 

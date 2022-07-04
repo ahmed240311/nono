@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:convert' as json;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:nono/model/usermodel.dart';
@@ -9,7 +9,7 @@ var url = Uri.parse(
 
 class FireStoreUser {
   final CollectionReference _collectionReference =
-  FirebaseFirestore.instance.collection('Users');
+      FirebaseFirestore.instance.collection('Users');
 
   Future<void> addUserToFireStore(UserModel userModel) async {
     return await _collectionReference.doc(userModel.id).set(userModel.toJson());
@@ -17,11 +17,36 @@ class FireStoreUser {
 }
 
 class ListOfCatagory {
- late List ListOfResult;
+  late List ListOfResult;
+  List<ModelForListOfPage> result = [];
 
   // Future<List> ShowResult(int? DetailsubId) async {
-  Future  <void> ShowResult() async {
-    var url = Uri.parse(
+  Future ShowResult() async {
+    var request = await http.get(
+        Uri.parse('http://real-estate-back-end.c1.biz/Ad-API.php?list/page'));
+    // http.StreamedResponse response = await request.send();
+
+    if (request.statusCode == 200) {
+      var data = jsonDecode(request.body);
+      data.forEach((value) {
+        result.add(ModelForListOfPage.fromJson(value));
+      });
+      // return data.map((element) => result.add(ModelForListOfPage.fromJson(element))).toList();
+
+      // (jsonDecode(request.body)).forEach((element) {
+      //   result.add(ModelForListOfPage.fromJson(element));
+      //   print('done');
+      // });
+
+      // var data=await response.stream.bytesToString();
+    } else {
+      print(request.reasonPhrase);
+      print('Not done');
+    }
+    // print(result[0].bathrooms_num);
+    return result;
+
+    /*  var url = Uri.parse(
         // 'http://real-estate-back-end.c1.biz/Ad-API.php?list/page/${DetailsubId}');
         'http://real-estate-back-end.c1.biz/Ad-API.php?list/page');
     await http.get(url,
@@ -36,14 +61,10 @@ class ListOfCatagory {
         print('List: ${ListOfResult.length}');
         return ListOfResult;
       }
-    });
+    });*/
     // return ListOfResult;
   }
-
-
-
 }
-
 
 //
 // class FireBaseHome {
